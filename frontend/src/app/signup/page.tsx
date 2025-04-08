@@ -20,6 +20,8 @@ export default function Signup() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
+  const api=  process.env.NEXT_PUBLIC_API_URL;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
@@ -33,7 +35,7 @@ export default function Signup() {
     }
 
     try {
-      const response = await fetch("http://localhost:4000/api/user/signup", {
+      const response = await fetch(`${api}/api/user/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

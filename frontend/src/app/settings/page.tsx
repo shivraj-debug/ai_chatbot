@@ -27,6 +27,8 @@ export default function Settings() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
+  const api= process.env.NEXT_PUBLIC_API_URL
+
   useEffect(() => {
     // Check for token in cookies instead of localStorage
     const hasToken = hasCookie("token");
@@ -38,7 +40,7 @@ export default function Settings() {
     // Fetch user data using the token from cookies
     const fetchUserData = async () => {
       try {
-        const res=await fetch("http://localhost:4000/api/user", {
+        const res=await fetch(`${api}/api/user`, {
           method: "GET",  
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -73,28 +75,6 @@ export default function Settings() {
         throw new Error("Authentication token missing")
       }
 
-      // Example API call to update settings (commented out):
-      // const response = await fetch("/api/settings", {
-      //   method: "PUT",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     "Authorization": `Bearer ${token}`
-      //   },
-      //   body: JSON.stringify({
-      //     name,
-      //     darkMode,
-      //     chatbotName,
-      //     theme,
-      //     model
-      //   })
-      // })
-      
-      // if (!response.ok) {
-      //   const errorData = await response.json()
-      //   throw new Error(errorData.message || "Failed to update settings")
-      // }
-
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
       setSuccess("Settings updated successfully")

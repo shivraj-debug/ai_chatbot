@@ -54,6 +54,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+
 interface userType{
   name:string,
   email:string,
@@ -149,6 +150,9 @@ export default function AdminDashboard() {
   // const [queries, setQueries] = useState<string[]>([])
   const router = useRouter()
 
+  const api=process.env.NEXT_PUBLIC_API_URL
+  console.log(api)
+
   const activeUsers = users.filter((user) => user.status === "active").length
 
   useEffect(() => {
@@ -202,7 +206,7 @@ export default function AdminDashboard() {
 
   useEffect(()=>{
     const fetchUser=async()=>{
-      const res=await fetch("http://localhost:4000/api/user/conversations",{
+      const res=await fetch(`${api}/api/user/conversations`,{
         method:"GET",
         credentials:"include",
       })   
@@ -212,12 +216,6 @@ export default function AdminDashboard() {
       }
       const data=await res.json()
 
-      // let activeUser=0;
-      // data.forEach((user:any) => {
-      //   if(user.conversation>=0){
-      //     activeUser++;
-      //   }
-      //   }) 
       setUser(data)
     }
     fetchUser()
@@ -225,7 +223,7 @@ export default function AdminDashboard() {
 
   useEffect(()=>{
     const fetchConversations=async()=>{
-      const res=await fetch("http://localhost:4000/api/chat/chatSummary",{
+      const res=await fetch(`${api}/api/chat/chatSummary`,{
         method:"GET",
         credentials:"include",
       })   
@@ -264,7 +262,7 @@ export default function AdminDashboard() {
   // console.log(filteredUsers)
 
   const handleLogout =async () => {
-    const res= await fetch("http://localhost:4000/api/admin/logout", {
+    const res= await fetch(`${api}/api/admin/logout`, {
         method:"GET",
         credentials:"include",
     })

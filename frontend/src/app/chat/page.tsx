@@ -45,6 +45,8 @@ export default function Chat() {
   const router = useRouter();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const api= process.env.NEXT_PUBLIC_API_URL;
+
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
@@ -65,7 +67,7 @@ export default function Chat() {
         setLoading(true);
         
         // 2. Make API request to get conversations
-        const response = await fetch('http://localhost:4000/api/chat/getConversations', {
+        const response = await fetch(`${api}/api/chat/getConversations`, {
           credentials: 'include' // For cookies/session
         });
   
@@ -100,7 +102,7 @@ export default function Chat() {
           // Load messages for current conversation
           const currentSessionId = localStorage.getItem('currentSession');
           const historyRes = await fetch(
-            `http://localhost:4000/api/chat/history?sessionId=${currentSessionId}`,
+            `${api}/api/chat/history?sessionId=${currentSessionId}`,
             { credentials: "include" }
           );
           const historyData = await historyRes.json();
@@ -176,7 +178,7 @@ export default function Chat() {
     };
   
     try {
-      const response = await fetch("http://localhost:4000/api/chat/message", {
+      const response = await fetch(`${api}/api/chat/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -250,7 +252,7 @@ export default function Chat() {
       setCurrentSessionId(sessionId);
 
       const response = await fetch(
-        `http://localhost:4000/api/chat/history?sessionId=${sessionId}${
+        `${api}/api/chat/history?sessionId=${sessionId}${
           days ? `&days=${days}` : ''
         }`,
         {
@@ -295,7 +297,7 @@ export default function Chat() {
   const handleDeleteConversation = async (sessionId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/chat/deleteConversation?sessionId=${sessionId}`,
+        `${api}/api/chat/deleteConversation?sessionId=${sessionId}`,
         { 
           method: "DELETE",
           headers: {
@@ -331,7 +333,7 @@ export default function Chat() {
   const handleRenameConversation = async (sessionId: string, newTitle: string) => {
     try {
       const response = await fetch(
-        "http://localhost:4000/api/chat/updateConversation",
+        `${api}/api/chat/updateConversation`,
         {
           method: "PUT",
           headers: {
