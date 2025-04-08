@@ -27,7 +27,7 @@ declare module 'express' {
 }
 app.use(
     cors({
-      origin: "ai-chatbot-ebon-theta.vercel.app",
+      origin: "https://ai-chatbot-ebon-theta.vercel.app",
       methods: ["GET", "POST", "PUT", "DELETE"],
       allowedHeaders: ["Content-Type", "Authorization"],
       credentials: true, // Allow cookies if needed
