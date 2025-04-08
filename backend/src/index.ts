@@ -27,7 +27,7 @@ declare module 'express' {
 }
 app.use(
     cors({
-      origin: "http://localhost:3000", // Change this to your frontend URL
+      origin: "ai-chatbot-ebon-theta.vercel.app",
       methods: ["GET", "POST", "PUT", "DELETE"],
       allowedHeaders: ["Content-Type", "Authorization"],
       credentials: true, // Allow cookies if needed
