@@ -10,12 +10,7 @@ import cookieParser from "cookie-parser";
 import {app,server} from "../src/socket/socket"
 
 
-app.use(cookieParser());
-app.use(express.json())
-dotenv.config();
 
-// connect to mongoDB
-connectDB();
 
 // for put user field in Request so that we can access id from there
 declare module 'express' {
@@ -25,6 +20,7 @@ declare module 'express' {
     };
   }
 }
+
 app.use(
     cors({
       origin: "https://ai-chatbot-ebon-theta.vercel.app",
@@ -33,6 +29,13 @@ app.use(
       credentials: true, // Allow cookies if needed
     })
   );
+
+  app.use(cookieParser());
+  app.use(express.json())
+  dotenv.config();
+  
+  // connect to mongoDB
+  connectDB();
 
 app.use("/api/user",userRoutes)
 app.use("/api/chat",chatRoute)
