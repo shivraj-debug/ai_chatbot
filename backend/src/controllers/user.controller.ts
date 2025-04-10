@@ -66,7 +66,8 @@ export const login = async (req: Request, res: Response):Promise<void> => {
         // const refreshToken = generateRefreshToken(user.id)
 
         res.cookie("token", accessToken, {
-            sameSite: "none",
+            sameSite: "none", 
+            httpOnly: true,
             secure: true,
             maxAge:7* 24 * 60 * 60 * 1000, // 1 day
           });
