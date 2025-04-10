@@ -9,8 +9,10 @@ import OpenAI from "openai";
 import cookieParser from "cookie-parser";
 import {app,server} from "../src/socket/socket"
 
+dotenv.config();
 
-
+ // connect to mongoDB
+ connectDB();
 
 // for put user field in Request so that we can access id from there
 declare module 'express' {
@@ -30,13 +32,11 @@ app.use(
     })
   );
 
+  app.options("*", cors());
+
   app.use(cookieParser());
   app.use(express.json())
-  dotenv.config();
   
-  // connect to mongoDB
-  connectDB();
-
 app.use("/api/user",userRoutes)
 app.use("/api/chat",chatRoute)
 app.use("/api/admin",adminRoutes)
