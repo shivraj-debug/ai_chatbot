@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect ,useRef, useMemo} from "react";
+import { useState, useEffect ,useRef} from "react";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { hasCookie} from "cookies-next";
@@ -55,10 +55,10 @@ export default function Chat() {
 
   useEffect(() => {
     // Check authentication
-    if (!hasCookie("token")) {
-      router.push("/login");
-      return;
-    }
+    // if (!hasCookie("token")) {
+    //   router.push("/login");
+    //   return;
+    // }
 
     // Fetch conversations from API
     const fetchConversations = async () => {
