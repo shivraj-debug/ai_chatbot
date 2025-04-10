@@ -193,18 +193,7 @@ export const chat = async (req: Request, res: Response): Promise<void> => {
     });
     await aiMessage.save();
   
-
-    // 7. Return response
-    // res.status(201).json({
-    //   success: true,
-    // sessionId,
-    // aiResponse: responseText,
-    // userMessageId: userMessage._id,
-    // aiMessageId: aiMessage._id,
-    // timestamp: new Date(),
-    // });
   } catch (error) {
-    console.error("Chat error:", error);
 
     res.status(500).json({
       success: false,

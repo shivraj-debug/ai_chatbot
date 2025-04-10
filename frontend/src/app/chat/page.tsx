@@ -3,7 +3,6 @@
 import { useState, useEffect ,useRef} from "react";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
-import { hasCookie} from "cookies-next";
 import { Settings, LogOut } from "lucide-react";
 import { FiMenu, FiSend } from "react-icons/fi";
 import { Textarea } from "@/components/ui/textarea";
@@ -51,16 +50,10 @@ export default function Chat() {
   // Auto-scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]); // Triggered when `messages` updates
+  }, [messages]); 
 
   useEffect(() => {
-    // Check authentication
-    // if (!hasCookie("token")) {
-    //   router.push("/login");
-    //   return;
-    // }
 
-    // Fetch conversations from API
     const fetchConversations = async () => {
       try {
         // 1. Show loading state
@@ -246,7 +239,6 @@ export default function Chat() {
 
 
   const handleSelectConversation = async (sessionId: string,days?: number) => {
-    // console.log(`Received sessionId: ${sessionId}, days: ${days}`); // Debug
     try {
       setLoading(true);
       setCurrentSessionId(sessionId);
@@ -285,7 +277,7 @@ export default function Chat() {
     setMessages([]);
     setInput("");
     localStorage.setItem('currentSession', newSessionId);
-    // Add empty conversation to list
+
 
   };
 
@@ -303,7 +295,6 @@ export default function Chat() {
           headers: {
             "Content-Type": "application/json",
           },
-          // body: JSON.stringify({ sessionId }),
           credentials: "include",
         }
       );

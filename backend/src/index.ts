@@ -5,13 +5,11 @@ import chatRoute from "./routes/chatRoute"
 import adminRoutes from "./routes/adminRoutes"
 import cors from "cors"
 import connectDB from "./config/db"
-import OpenAI from "openai";
 import cookieParser from "cookie-parser";
 import {app,server} from "../src/socket/socket"
 
 dotenv.config();
 
- // connect to mongoDB
  connectDB();
 
 // for put user field in Request so that we can access id from there

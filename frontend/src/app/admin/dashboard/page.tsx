@@ -11,7 +11,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import {hasCookie, setCookie} from "cookies-next"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   BarChart,
@@ -71,16 +70,7 @@ interface conversationType{
   date:string,
 }
 
-// const mockConversations = [
-//   { id: 1, user: "John Doe", messages: 15, duration: "12 min", satisfaction: "positive", date: "2023-03-19" },
-//   { id: 2, user: "Jane Smith", messages: 8, duration: "5 min", satisfaction: "neutral", date: "2023-03-19" },
-//   { id: 3, user: "Emily Davis", messages: 23, duration: "18 min", satisfaction: "positive", date: "2023-03-19" },
-//   { id: 4, user: "Michael Wilson", messages: 12, duration: "9 min", satisfaction: "negative", date: "2023-03-18" },
-//   { id: 5, user: "David Miller", messages: 19, duration: "14 min", satisfaction: "positive", date: "2023-03-18" },
-//   { id: 6, user: "Lisa Anderson", messages: 7, duration: "4 min", satisfaction: "neutral", date: "2023-03-18" },
-//   { id: 7, user: "John Doe", messages: 11, duration: "8 min", satisfaction: "positive", date: "2023-03-17" },
-//   { id: 8, user: "Jane Smith", messages: 16, duration: "13 min", satisfaction: "negative", date: "2023-03-17" },
-// ]
+
 
 const mockFlaggedContent = [
   { id: 1, user: "Michael Wilson", content: "How can I hack into a website?", date: "2023-03-19", status: "pending" },
@@ -142,16 +132,13 @@ export default function AdminDashboard() {
   const [searchUser, setSearchUser] = useState("")
   const [timeRange, setTimeRange] = useState("7d")
   const [users,setUser]=useState<userType[]>([]);
-  // const [filteredUsers, setFilteredUsers] = useState(users)
   const [conversations, setConversations] = useState<conversationType[]>([])
   const [positiveConversations, setPositiveConversations] = useState<number>(1)
   const [negativeConversations, setNegativeConversations] = useState<number>(1)
   const [neutralConversations, setNeutralConversations] = useState<number>(1)
-  // const [queries, setQueries] = useState<string[]>([])
   const router = useRouter()
 
   const api=process.env.NEXT_PUBLIC_API_URL
-  console.log(api)
 
   const activeUsers = users.filter((user) => user.status === "active").length
 
@@ -187,23 +174,6 @@ export default function AdminDashboard() {
     { name: "negative", value: negativeConversations}
   ]
 
-
-// useEffect(()=>{ 
-//   const fetchQueries=async()=>{
-//     const res=await fetch("http://localhost:4000/api/chat/topQueries",{
-//       method:"GET",
-//       credentials:"include",
-//     })   
-//     if(!res.ok){
-//       console.log("error in fetching users")
-//       throw new Error("error in fetching users")
-//     }
-//     const data=await res.json()
-//     console.log(data)
-//     setQueries(data)
-//   }
-//   },[router])
-
   useEffect(()=>{
     const fetchUser=async()=>{
       const res=await fetch(`${api}/api/user/conversations`,{
@@ -236,30 +206,6 @@ export default function AdminDashboard() {
     }
     fetchConversations()
   },[router])
-
-  useEffect(() => {
-    // In a real application, you would check if the user is an admin
-    if (!hasCookie("adminToken")) {
-      router.push('/admin/login');
-      // For demo purposes, we'll allow access
-    }
-  }, [router])
-
-  // useEffect(() => {
-  //   if (searchUser) {
-  //     setFilteredUsers(
-  //       users.filter(
-  //         (user) =>
-  //           user.name.toLowerCase().includes(searchUser.toLowerCase()) ||
-  //           user.email.toLowerCase().includes(searchUser.toLowerCase()),
-  //       ),
-  //     ) 
-  //   } else {
-  //     setFilteredUsers(users)
-  //   }
-  // }, [searchUser])
-
-  // console.log(filteredUsers)
 
   const handleLogout =async () => {
     const res= await fetch(`${api}/api/admin/logout`, {

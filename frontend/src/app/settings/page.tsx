@@ -30,14 +30,7 @@ export default function Settings() {
   const api= process.env.NEXT_PUBLIC_API_URL
 
   useEffect(() => {
-    // Check for token in cookies instead of localStorage
-    const hasToken = hasCookie("token");
-    if (!hasCookie) {
-      router.push("/login")
-      return
-    }
 
-    // Fetch user data using the token from cookies
     const fetchUserData = async () => {
       try {
         const res=await fetch(`${api}/api/user`, {

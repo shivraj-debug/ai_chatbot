@@ -1,8 +1,8 @@
-// models/Message.ts
+
 import mongoose, { Schema, Document } from 'mongoose';
 
 interface IMessage extends Document {
-  userId: mongoose.Schema.Types.ObjectId; // Reference to the User model
+  userId: mongoose.Schema.Types.ObjectId;
   sessionId: string;
   sender: 'user' | 'ai';
   content: string;
@@ -15,11 +15,11 @@ const chatSchema = new Schema<IMessage>(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User', // Reference to the User model
+      ref: 'User', 
     },
     sessionId: {
       type: String,
-      required: true, // To group messages by session
+      required: true,
     },
     sender: {
       type: String,

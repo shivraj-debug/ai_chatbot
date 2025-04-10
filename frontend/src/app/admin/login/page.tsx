@@ -2,15 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import {  hasCookie } from "cookies-next";
-import { useEffect } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -20,13 +17,6 @@ export default function Login() {
   const router = useRouter();
 
   const api= process.env.NEXT_PUBLIC_API_URL;
-
-  useEffect(() => {
-    if (hasCookie("adminToken")) {
-      router.push("/admin/dashboard");
-      return
-    }
-  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

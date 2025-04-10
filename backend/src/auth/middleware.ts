@@ -5,11 +5,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const authMiddleware = (req:Request, res: Response, next: NextFunction): void => {
-  const token = req.cookies?.token // Get token from cookie or header
+  const token = req.cookies?.token
 
   if (!token) {
     res.status(401).json({ error: "Access denied. No token provided." });
-    return; // Ensure function exits after response
+    return; 
   }
 
   try {
@@ -20,11 +20,11 @@ const authMiddleware = (req:Request, res: Response, next: NextFunction): void =>
       throw new Error("Invalid token structure. Missing 'id'.");
     }
 
-    req.user = { id: decoded.id }; // Ensure 'id' exists in the payload    
+    req.user = { id: decoded.id };    
     next();
   } catch (error) {
     res.status(401).json({ error: "Invalid or expired token." });
-    return; // Ensure function exits after response
+    return; 
   }
 };
 

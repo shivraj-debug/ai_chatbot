@@ -25,10 +25,9 @@ router.post("/login", (req:Request, res) => {
 router.get("/logout" ,(req:Request, res) => {
     try{
         res.cookie("adminToken" , "" , {
-            maxAge: 0,         // Expire the cookie immediately
+            maxAge: 0,        
           });
           res.status(200).json({message:"logged out successfully"})
-        //   res.setHeader("Cache-Control", "no-store");
    
      }catch(err){
         throw new Error("error during logout")

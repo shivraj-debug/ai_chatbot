@@ -10,7 +10,6 @@ router.delete("/deleteConversation",authMiddleware,deleteconversation);
 router.put("/updateConversation",authMiddleware,updateconversation);
 router.get("/chatSummary",chatSummary);
 router.get("/topQueries",topqueries);
-// router.get("/",authMiddleware,conversation);
 
 
 export  default router

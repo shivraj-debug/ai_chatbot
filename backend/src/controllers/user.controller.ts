@@ -110,10 +110,10 @@ export const userCount=async(req:Request,res:Response):Promise<void>=>{
         const usersWithSessions = await User.aggregate([
             {
               $lookup: {
-                from: "chats",        // Join with the "chats" collection
-                localField: "_id",    // Match _id from "users"
-                foreignField: "userId", // Match userId from "chats"
-                as: "userChats"       // Store result in "userChats"
+                from: "chats",        
+                localField: "_id",   
+                foreignField: "userId", 
+                as: "userChats"      
               }
             },
             {

@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { signIn } from "next-auth/react"
 import {  MessageSquare } from "lucide-react"
 import Link from "next/link"
 import {hasCookie} from "cookies-next"
