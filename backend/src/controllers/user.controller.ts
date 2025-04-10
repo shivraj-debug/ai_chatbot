@@ -50,7 +50,7 @@ export const login = async (req: Request, res: Response):Promise<void> => {
         // Find user by email
         const user = await User.findOne({ email });
         if (!user) {
-             res.status(400).json({ error: "Invalid credentials" });
+             res.status(400).json({ message: "Invalid credentials" });
              return
         }
 
@@ -66,7 +66,8 @@ export const login = async (req: Request, res: Response):Promise<void> => {
         // const refreshToken = generateRefreshToken(user.id)
 
         res.cookie("token", accessToken, {
-            sameSite: "lax",
+            sameSite: "none",
+            secure: true,
             maxAge:7* 24 * 60 * 60 * 1000, // 1 day
           });
         
